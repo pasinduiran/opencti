@@ -48,7 +48,7 @@ services:
   opencti:
     image: opencti/platform:2.1.1
     environment:
-      - APP__PORT=8080
+      - APP__PORT=80
       - APP__ADMIN__EMAIL=admin@opencti.io
       - APP__ADMIN__PASSWORD=admin123
       - APP__ADMIN__TOKEN=c39d93ad-0f96-4716-92e3-635614e39dd7
@@ -74,7 +74,7 @@ services:
       - RABBITMQ__USERNAME=admin123
       - RABBITMQ__PASSWORD=admin123
     ports:
-      - "8080:8080"
+      - "80:80"
     depends_on:
       - grakn
       - redis
@@ -85,7 +85,7 @@ services:
   worker:
     image: opencti/worker:2.1.1
     environment:
-      - OPENCTI_URL=http://opencti:8080
+      - OPENCTI_URL=http://opencti:80
       - OPENCTI_TOKEN=c39d93ad-0f96-4716-92e3-635614e39dd7
       - WORKER_LOG_LEVEL=info
     depends_on:
@@ -97,7 +97,7 @@ services:
   connector-export-file-stix:
     image: opencti/connector-export-file-stix:latest
     environment:
-      - OPENCTI_URL=http://opencti:8080
+      - OPENCTI_URL=http://opencti:80
       - OPENCTI_TOKEN=c39d93ad-0f96-4716-92e3-635614e39dd7
       - CONNECTOR_ID=c39d93ad-0f96-4716-92e3-635614e39dd7   # Valid UUDv4
       - CONNECTOR_TYPE=INTERNAL_EXPORT_FILE
@@ -109,7 +109,7 @@ services:
   connector-import-file-stix:
     image: opencti/connector-import-file-stix:latest
     environment:
-      - OPENCTI_URL=http://opencti:8080
+      - OPENCTI_URL=http://opencti:80
       - OPENCTI_TOKEN=c39d93ad-0f96-4716-92e3-635614e39dd7
       - CONNECTOR_ID=c39d93ad-0f96-4716-92e3-635614e39dd7   # Valid UUDv4
       - CONNECTOR_TYPE=INTERNAL_IMPORT_FILE
@@ -121,7 +121,7 @@ services:
   connector-opencti:
     image: opencti/connector-opencti:latest
     environment:
-      - OPENCTI_URL=http://opencti:8080
+      - OPENCTI_URL=http://opencti:80
       - OPENCTI_TOKEN=c39d93ad-0f96-4716-92e3-635614e39dd7
       - CONNECTOR_ID=c39d93ad-0f96-4716-92e3-635614e39dd7  # Valid UUDv4
       - CONNECTOR_TYPE=EXTERNAL_IMPORT
@@ -139,7 +139,7 @@ services:
   connector-mitre:
     image: opencti/connector-mitre:latest
     environment:
-      - OPENCTI_URL=http://opencti:8080
+      - OPENCTI_URL=http://opencti:80
       - OPENCTI_TOKEN=c39d93ad-0f96-4716-92e3-635614e39dd7
       - CONNECTOR_ID=c39d93ad-0f96-4716-92e3-635614e39dd7 # Valid UUDv4
       - CONNECTOR_TYPE=EXTERNAL_IMPORT
