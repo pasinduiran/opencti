@@ -25,7 +25,7 @@ services:
         soft: 65536
         hard: 65536
   minio:
-    image: minio/minio
+    image: minio/minio:minio/minio:RELEASE.2019-10-12T01-39-57Z
     volumes:
       - s3data:/data
     ports:
