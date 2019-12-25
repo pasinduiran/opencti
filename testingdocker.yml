@@ -25,7 +25,7 @@ services:
         soft: 65536
         hard: 65536
   minio:
-    image: minio/minio:edge
+    image: minio/minio
     volumes:
       - s3data:/data
     ports:
