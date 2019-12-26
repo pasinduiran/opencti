@@ -46,7 +46,7 @@ services:
       - RABBITMQ_DEFAULT_PASS=admin123    
     restart: always
   opencti:
-    image: opencti/platform:2.1.1
+    image: opencti/platform:2.1.2
     environment:
       - APP__PORT=80
       - APP__ADMIN__EMAIL=admin@opencti.io
