@@ -129,7 +129,7 @@ services:
       - CONNECTOR_SCOPE=text/csv
       - CONNECTOR_CONFIDENCE_LEVEL=3
       - CONNECTOR_LOG_LEVEL=info
-    restart: always  
+    restart: always
   connector-opencti:
     image: opencti/connector-opencti:latest
     environment:
@@ -228,7 +228,7 @@ services:
       - MISP_IMPORT_FROM_DATE=2017-01-01 # Optional, import all event from this date
       - MISP_IMPORT_TAGS=opencti:import,type:osint # Optional, list of tags used for import events
       - MISP_INTERVAL=1 # Required, in minutes
-    restart: always  
+    restart: always
 volumes:
   grakndata:
   esdata:
