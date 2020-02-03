@@ -46,7 +46,7 @@ services:
       - RABBITMQ_DEFAULT_PASS=admin123    
     restart: always
   opencti:
-    image: opencti/platform:2.1.2
+    image: opencti/platform:2.1.4
     environment:
       - APP__PORT=80
       - APP__ADMIN__EMAIL=admin@opencti.io
@@ -83,7 +83,7 @@ services:
       - rabbitmq
     restart: always
   worker:
-    image: opencti/worker:2.1.1
+    image: opencti/worker:2.1.4
     environment:
       - OPENCTI_URL=http://opencti:80
       - OPENCTI_TOKEN=c39d93ad-0f96-4716-92e3-635614e39dd7
@@ -92,18 +92,18 @@ services:
       - opencti
     deploy:
       mode: replicated
-      replicas: 1
+      replicas: 200
     restart: always
   connector-export-file-stix:
     image: opencti/connector-export-file-stix:latest
     environment:
       - OPENCTI_URL=http://opencti:80
       - OPENCTI_TOKEN=c39d93ad-0f96-4716-92e3-635614e39dd7
-      - CONNECTOR_ID=c39d93ad-0f96-4716-92e3-635614e39dd7   # Valid UUDv4
+      - CONNECTOR_ID=fe795b8e-b12c-4ddb-8cee-e5554ea62d48   # Valid UUDv4
       - CONNECTOR_TYPE=INTERNAL_EXPORT_FILE
       - CONNECTOR_NAME=ExportFileStix2
       - CONNECTOR_SCOPE=application/json
-      - CONNECTOR_CONFIDENCE_LEVEL=3
+      - CONNECTOR_CONFIDENCE_LEVEL=10
       - CONNECTOR_LOG_LEVEL=info
     restart: always
   connector-import-file-stix:
@@ -111,11 +111,11 @@ services:
     environment:
       - OPENCTI_URL=http://opencti:80
       - OPENCTI_TOKEN=c39d93ad-0f96-4716-92e3-635614e39dd7
-      - CONNECTOR_ID=c39d93ad-0f96-4716-92e3-635614e39dd7   # Valid UUDv4
+      - CONNECTOR_ID=e58db32c-4354-4bd8-af1e-b9fc45f67920   # Valid UUDv4
       - CONNECTOR_TYPE=INTERNAL_IMPORT_FILE
       - CONNECTOR_NAME=ImportFileStix2
       - CONNECTOR_SCOPE=application/json
-      - CONNECTOR_CONFIDENCE_LEVEL=3
+      - CONNECTOR_CONFIDENCE_LEVEL=5
       - CONNECTOR_LOG_LEVEL=info
     restart: always
   connector-opencti:
@@ -123,16 +123,16 @@ services:
     environment:
       - OPENCTI_URL=http://opencti:80
       - OPENCTI_TOKEN=c39d93ad-0f96-4716-92e3-635614e39dd7
-      - CONNECTOR_ID=c39d93ad-0f96-4716-92e3-635614e39dd7  # Valid UUDv4
+      - CONNECTOR_ID=f428adb8-50af-49bd-94f3-89ab09516bf3  # Valid UUDv4
       - CONNECTOR_TYPE=EXTERNAL_IMPORT
       - CONNECTOR_NAME=OpenCTI
       - CONNECTOR_SCOPE=identity,sector,region,country,city
-      - CONNECTOR_CONFIDENCE_LEVEL=5
+      - CONNECTOR_CONFIDENCE_LEVEL=8
       - CONNECTOR_UPDATE_EXISTING_DATA=true
       - CONNECTOR_LOG_LEVEL=info
       - CONFIG_SECTORS_FILE_URL=https://raw.githubusercontent.com/OpenCTI-Platform/datasets/master/data/sectors.json
       - CONFIG_GEOGRAPHY_FILE_URL=https://raw.githubusercontent.com/OpenCTI-Platform/datasets/master/data/geography.json
-      - CONFIG_INTERVAL=7 # Days
+      - CONFIG_INTERVAL=1 # Days
     depends_on:
       - opencti
     restart: always
@@ -141,16 +141,16 @@ services:
     environment:
       - OPENCTI_URL=http://opencti:80
       - OPENCTI_TOKEN=c39d93ad-0f96-4716-92e3-635614e39dd7
-      - CONNECTOR_ID=c39d93ad-0f96-4716-92e3-635614e39dd7 # Valid UUDv4
+      - CONNECTOR_ID=8e601a18-2125-47f6-8f7f-ca9466efbf33 # Valid UUDv4
       - CONNECTOR_TYPE=EXTERNAL_IMPORT
       - CONNECTOR_NAME=MITRE ATT&CK
       - CONNECTOR_SCOPE=identity,attack-pattern,course-of-action,intrusion-set,malware,tool,report
-      - CONNECTOR_CONFIDENCE_LEVEL=3
+      - CONNECTOR_CONFIDENCE_LEVEL=6
       - CONNECTOR_UPDATE_EXISTING_DATA=true
       - CONNECTOR_LOG_LEVEL=info
       - MITRE_ENTERPRISE_FILE_URL=https://raw.githubusercontent.com/mitre/cti/master/enterprise-attack/enterprise-attack.json
       - MITRE_PRE_ATTACK_FILE_URL=https://raw.githubusercontent.com/mitre/cti/master/pre-attack/pre-attack.json
-      - MITRE_INTERVAL=7 # Days
+      - MITRE_INTERVAL=1 # Days
     restart: always
 volumes:
   grakndata:
