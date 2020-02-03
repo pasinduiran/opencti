@@ -208,7 +208,6 @@ services:
       - CONNECTOR_LOG_LEVEL=info
       - IPINFO_TOKEN=7a024374-5f47-4f67-be59-77c10ed0d46d
     restart: always
-  services:
   connector-misp:
     image: opencti/connector-misp:latest
     environment:
