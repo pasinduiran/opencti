@@ -223,7 +223,7 @@ services:
       - CONNECTOR_LOG_LEVEL=info
       - CONFIG_SECTORS_FILE_URL=https://raw.githubusercontent.com/OpenCTI-Platform/datasets/master/data/sectors.json
       - CONFIG_GEOGRAPHY_FILE_URL=https://raw.githubusercontent.com/OpenCTI-Platform/datasets/master/data/geography.json
-      - CONFIG_INTERVAL=1 # Days
+      - CONFIG_INTERVAL=7 # Days
     depends_on:
       - opencti
     deploy:
@@ -249,7 +249,7 @@ services:
       - CONNECTOR_LOG_LEVEL=info
       - MITRE_ENTERPRISE_FILE_URL=https://raw.githubusercontent.com/mitre/cti/master/enterprise-attack/enterprise-attack.json
       - MITRE_PRE_ATTACK_FILE_URL=https://raw.githubusercontent.com/mitre/cti/master/pre-attack/pre-attack.json
-      - MITRE_INTERVAL=1 # Days
+      - MITRE_INTERVAL=7 # Days
     deploy:
       resources:
         limits:
@@ -273,7 +273,7 @@ services:
       - CONNECTOR_LOG_LEVEL=info
       - AMITT_FILE_URL=https://raw.githubusercontent.com/VVX7/cti/master/amitt-attack/amitt-attack.json
       - PRE_AMITT_FILE_URL=https://raw.githubusercontent.com/VVX7/cti/master/amitt-pre-attack/amitt-pre-attack.json
-      - AMITT_INTERVAL=1 # Days
+      - AMITT_INTERVAL=7 # Days
     deploy:
       resources:
         limits:
@@ -296,7 +296,7 @@ services:
       - CONNECTOR_UPDATE_EXISTING_DATA=true
       - CONNECTOR_LOG_LEVEL=info
       - CVE_NVD_DATA_FEED=https://nvd.nist.gov/feeds/json/cve/1.1/nvdcve-1.1-recent.json.gz
-      - CVE_INTERVAL=1 # Days
+      - CVE_INTERVAL=7 # Days
     deploy:
       resources:
         limits:
