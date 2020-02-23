@@ -42,8 +42,8 @@ services:
   rabbitmq:
     image: rabbitmq:3.7.17-management
     environment:
-      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
-      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}    
+      - RABBITMQ_DEFAULT_USER=admin123
+      - RABBITMQ_DEFAULT_PASS=admin123    
     restart: always
   opencti:
     image: opencti/platform:latest
