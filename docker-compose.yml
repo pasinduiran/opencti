@@ -158,7 +158,7 @@ services:
       - CONNECTOR_LOG_LEVEL=info
       - CONFIG_SECTORS_FILE_URL=https://raw.githubusercontent.com/OpenCTI-Platform/datasets/master/data/sectors.json
       - CONFIG_GEOGRAPHY_FILE_URL=https://raw.githubusercontent.com/OpenCTI-Platform/datasets/master/data/geography.json
-      - CONFIG_INTERVAL=7 # Days
+      - CONFIG_INTERVAL=30 # Days
     restart: always
   connector-mitre:
     image: opencti/connector-mitre:latest
@@ -174,8 +174,54 @@ services:
       - CONNECTOR_LOG_LEVEL=info
       - MITRE_ENTERPRISE_FILE_URL=https://raw.githubusercontent.com/mitre/cti/master/enterprise-attack/enterprise-attack.json
       - MITRE_PRE_ATTACK_FILE_URL=https://raw.githubusercontent.com/mitre/cti/master/pre-attack/pre-attack.json
-      - MITRE_INTERVAL=7 # Days
+      - MITRE_INTERVAL=30 # Days
     restart: always
+  connector-amitt:
+    image: opencti/connector-amitt:latest
+    environment:
+      - OPENCTI_URL=http://opencti:80
+      - OPENCTI_TOKEN=c39d93ad-0f96-4716-92e3-635614e39dd7
+      - CONNECTOR_ID=f822a807-0b33-4c0c-934f-1097bea27fbb
+      - CONNECTOR_TYPE=EXTERNAL_IMPORT
+      - CONNECTOR_NAME=AM!TT
+      - CONNECTOR_SCOPE=identity,attack-pattern,course-of-action,intrusion-set,malware,tool,report
+      - CONNECTOR_CONFIDENCE_LEVEL=3
+      - CONNECTOR_UPDATE_EXISTING_DATA=true
+      - CONNECTOR_LOG_LEVEL=info
+      - AMITT_FILE_URL=https://raw.githubusercontent.com/VVX7/cti/master/amitt-attack/amitt-attack.json
+      - PRE_AMITT_FILE_URL=https://raw.githubusercontent.com/VVX7/cti/master/amitt-pre-attack/amitt-pre-attack.json
+      - AMITT_INTERVAL=30 # Days
+    restart: always  
+  connector-cve:
+    image: opencti/connector-cve:latest
+    environment:
+      - OPENCTI_URL=http://opencti:80
+      - OPENCTI_TOKEN=c39d93ad-0f96-4716-92e3-635614e39dd7
+      - CONNECTOR_ID=1c749e73-5b15-4f1b-87de-e7aa1e85c786
+      - CONNECTOR_TYPE=EXTERNAL_IMPORT
+      - CONNECTOR_NAME=Common Vulnerabilities and Exposures
+      - CONNECTOR_SCOPE=identity,vulnerability
+      - CONNECTOR_CONFIDENCE_LEVEL=3
+      - CONNECTOR_UPDATE_EXISTING_DATA=true
+      - CONNECTOR_LOG_LEVEL=info
+      - CVE_IMPORT_HISTORY=true
+      - CVE_NVD_DATA_FEED=https://nvd.nist.gov/feeds/json/cve/1.1/nvdcve-1.1-recent.json.gz
+      - CVE_INTERVAL=30 # Days
+    restart: always  
+  connector-virustotal:
+    image: opencti/connector-virustotal:latest
+    environment:
+      - OPENCTI_URL=http://opencti:80
+      - OPENCTI_TOKEN=c39d93ad-0f96-4716-92e3-635614e39dd7
+      - CONNECTOR_ID=4c95f258-a160-4561-b5ac-5f51e084c54c
+      - CONNECTOR_TYPE=INTERNAL_ENRICHMENT
+      - CONNECTOR_NAME=VirusTotal
+      - CONNECTOR_SCOPE='file-md5,file-sha1,file-sha256'
+      - CONNECTOR_CONFIDENCE_LEVEL=3
+      - CONNECTOR_LOG_LEVEL=info
+      - VIRUSTOTAL_TOKEN=02fd8a55d4cb3d4979550e127164cff279cf65613c0a3bd846fa730007453b67
+      - VIRUSTOTAL_MAX_TLP=TLP:AMBER
+    restart: always  
 volumes:
   grakndata:
   esdata:
